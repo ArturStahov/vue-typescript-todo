@@ -4,15 +4,14 @@
     <h1>{{ name }}</h1>
     <h1>{{ myArray.name }}</h1>
     <p>
-      For a guide and recipes on how to configure / customize this project,<br />
-      check out the
+      ПРИМЕР класс компонет стиля vue-class-component
     </p>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { WithRenderInterface} from "./interfaceHellowWorld";
+import { WithRenderInterface} from "@/components/interface.HellowWorld";
 
 @Component
 export default class HelloWorld extends Vue {  

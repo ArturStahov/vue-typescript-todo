@@ -1,2 +1,2 @@
-# vue-typescript-todo
+### Learn TypeScript : example
 
