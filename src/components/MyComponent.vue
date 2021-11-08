@@ -8,6 +8,11 @@
 import Vue, { PropType } from "vue";
 import { ComplexMessage } from "./interface.Mycomponent";
 
+ interface IProp {
+          name:string;
+          age:number;
+        }
+
 const MyComponent = Vue.extend({
   data() {
     return {
@@ -15,6 +20,12 @@ const MyComponent = Vue.extend({
     };
   },
   methods: {
+
+
+   getValue<T extends IProp, U extends keyof T>(obj:T,prop:U){
+        return obj[prop]
+       },
+
     myFync(): (number | string)[] {
       //если ми не знаем масив каких типов будет передан делаем Дженерик
       //Думай о дженериках как о аргументе функции в котором вы указиваєте тип других аргументов
@@ -68,6 +79,45 @@ const MyComponent = Vue.extend({
       const getLength = <T extends ILength>(a: T) => {
         return a.length;
       };
+
+
+        // keyof -- ключь в обьекте  
+        interface IProp {
+          name:string;
+          age:number;
+        }
+       function getValue<T extends IProp, U extends keyof T>(obj:T,prop:U){
+        return obj[prop]
+       }
+
+       const someProp = getValue({name:'Art',age:35},'name');
+
+       
+        //1) получаем ключь входящего значения или null
+       function getKey<T extends object, U extends keyof T>(obj:T, value:T[U]):U|null {
+         const key = (Object.keys(obj) as Array<U>).find(key=> obj[key] === value)
+         return key || null
+       }
+       //2) получаем ключь входящего значения или null(тоже что и віше)
+       function getKey2<T extends object>(obj:T, value:T[keyof T]):keyof T|null {
+         const key = (Object.keys(obj) as Array<keyof T>).find(key=> obj[key] === value)
+         return key || null
+       }
+       //  патчим входящий обьект
+       function PatchFild<T extends object,U extends keyof T,V extends T[U]>(obj:T,field:U,value:V):T{
+           return obj
+       }
+        PatchFild({f:'1'},'f',"3")
+
+       const key = getKey({name:'Artur'},'Artur')
+
+       
+        // указиваем жестко тип в дженерик
+       function format<T = string>(s?:T): T|undefined {
+         return s
+       }
+
+       
 
 
        interface IFirstObj {
